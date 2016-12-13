@@ -12,5 +12,82 @@
     </head>
     <body>
 
+        <!-- Layout:
+        Create an element for our table. Turn it green, and give it a white border.
+        Create an element for the dealer's hand and for the player's hand.
+        Create an element for the dealer's total and the player's total.
+        Create an element for each card in each hand, a maximum of 6 cards.
+        Assign a generic class to each card and a unique class to each card so we style and target
+        Make a Deal, hit, and stand button -->
+
+        <!-- Rules:
+        Dealer deals you two cards and deals herself two cards.
+        The deck lies somewhere.
+        Both players cards are face up but only one card of the dealer's is face up.
+        An Ace can be either 1 or 11, your call.
+
+        1. Deal
+            - 2 cards both player and dealer
+            - both cards are face up for player
+            - only 1 card is face up for dealer
+        2. Hit or stand:
+            - if player hits: take the top card
+            - recalculate player total
+            - if total > 21, player busts
+            - if total is < 21 player can stand and "deny" turn
+        3. Dealer's turn:
+            - if dealer total is < 17, the deal will automatically hit
+            - if dealer total > 21, the dealer busts and the player wins -->
+
+
+
+        <div class="container">
+            <div class="row">
+                <!-- The table element -->
+                <div class="the-table col-sm-8 col-sm-offset-2">
+
+                    <!-- The dealer element -->
+                    <div class="row">
+                        <div class="col-sm-12 dealer-hand-wrapper">
+                            <!-- Dealer total -->
+                            <div class="col-sm-3 dealer-total">Dealer total:
+                                <span class="dealer-total-number"> 0</span>
+                            </div>
+                            <!-- Dealer's cards -->
+                            <div class="col-sm-9 dealer-cards">
+                                <!-- 6 cards, so 2 colunms wide -->
+                                <div class="col-sm-2 card card-one"></div>
+                                <div class="col-sm-2 card card-two"></div>
+                                <div class="col-sm-2 card card-three"></div>
+                                <div class="col-sm-2 card card-four"></div>
+                                <div class="col-sm-2 card card-five"></div>
+                                <div class="col-sm-2 card card-six"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The player element -->
+                    <div class="row">
+                        <div class="col-sm-12 player-hand-wrapper">
+                            <!-- Player total -->
+                            <div class="col-sm-3 player-total">Player total:
+                                <span class="player-total-number"> 0</span>
+                            </div>
+                            <!-- Player's cards -->
+                            <div class="col-sm-9 player-cards">
+                                <!-- 6 cards, so 2 colunms wide -->
+                                <div class="col-sm-2 card card-one"></div>
+                                <div class="col-sm-2 card card-two"></div>
+                                <div class="col-sm-2 card card-three"></div>
+                                <div class="col-sm-2 card card-four"></div>
+                                <div class="col-sm-2 card card-five"></div>
+                                <div class="col-sm-2 card card-six"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
