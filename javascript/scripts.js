@@ -81,14 +81,18 @@ $(document).ready(function() {
         // If player has more than 21 , player loses
         if (playerTotal > 21) {
             $('.dealer-wins').text("Dealer wins with: ");
+            $('.player-wins').text("You lose with: ")
         } else if (dealerTotal > 21) {
             $('.player-wins').text("You win with: ");
+            $('.dealer-wins').text("Dealer loses with: ");
         } else {
             // No one busted, see who is higher
             if (playerTotal > dealerTotal) {
                 $('.player-wins').text("You win with: ");
+                $('.dealer-wins').text("Dealer loses with: ");
             } else if (dealerTotal > playerTotal) {
                 $('.dealer-wins').text("Dealer wins with: ");
+                $('.player-wins').text("You lose with: ")
             } else {
                 // Tie
                 $('.player-wins').text("Push: ");
@@ -136,14 +140,8 @@ $(document).ready(function() {
     }
 
     function placeCard(who, where, whatCard) {
-        // if ((who === 'dealer') && (where === 2) && (firstDeal)) {
-        //     firstDeal = false;
-        //     var classSelector = '.' + who + '-cards .card-' + where;
-        //     $(classSelector).html('<img src="images/deck.png">');
-        // } else {
-            var classSelector = '.' + who + '-cards .card-' + where;
-            $(classSelector).html('<img src="images/' + whatCard + '.png">');
-        // }
+        var classSelector = '.' + who + '-cards .card-' + where;
+        $(classSelector).html('<img src="images/' + whatCard + '.png">');
     }
 
 
