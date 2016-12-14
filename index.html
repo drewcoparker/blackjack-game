@@ -48,18 +48,19 @@
                     <div class="row">
                         <div class="col-sm-12 dealer-hand-wrapper">
                             <!-- Dealer total -->
-                            <div class="col-sm-3 dealer-total">Dealer total:
+                            <div class="col-sm-2 dealer-total">
+                                <span class="dealer-wins">Dealer's total:</span>
                                 <span class="dealer-total-number"> 0</span>
                             </div>
                             <!-- Dealer's cards -->
-                            <div class="col-sm-9 dealer-cards">
+                            <div class="col-sm-10 dealer-cards">
                                 <!-- 6 cards, so 2 colunms wide -->
-                                <div class="col-sm-1 card card-one"></div>
-                                <div class="col-sm-1 card card-two"></div>
-                                <div class="col-sm-1 card card-three"></div>
-                                <div class="col-sm-1 card card-four"></div>
-                                <div class="col-sm-1 card card-five"></div>
-                                <div class="col-sm-1 card card-six"></div>
+                                <div class="card card-1"></div>
+                                <div class="card card-2"></div>
+                                <div class="card card-3"></div>
+                                <div class="card card-4"></div>
+                                <div class="card card-5"></div>
+                                <div class="card card-6"></div>
                             </div>
                         </div>
                     </div>
@@ -68,33 +69,35 @@
                     <div class="row">
                         <div class="col-sm-12 player-hand-wrapper">
                             <!-- Player total -->
-                            <div class="col-sm-3 player-total">Player total:
+                            <div class="col-sm-2 player-total">
+                                <span class="player-wins">Player's total:</span>
                                 <span class="player-total-number"> 0</span>
                             </div>
                             <!-- Player's cards -->
-                            <div class="col-sm-9 player-cards">
+                            <div class="col-sm-10 player-cards">
                                 <!-- 6 cards, so 2 colunms wide -->
-                                <div class="col-sm-1 card card-one"></div>
-                                <div class="col-sm-1 card card-two"></div>
-                                <div class="col-sm-1 card card-three"></div>
-                                <div class="col-sm-1 card card-four"></div>
-                                <div class="col-sm-1 card card-five"></div>
-                                <div class="col-sm-1 card card-six"></div>
+                                <div class="card card-1"></div>
+                                <div class="card card-2"></div>
+                                <div class="card card-3"></div>
+                                <div class="card card-4"></div>
+                                <div class="card card-5"></div>
+                                <div class="card card-6"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-2 col-sm-offset-2">
-                            <button class="deal-button">Deal</button>
+                    <div class="row controls">
+                        <div class="col-sm-2 col-sm-offset-2 btn">
+                            <button class="btn btn-danger btn-block deal-button">Deal</button>
                         </div>
-                        <div class="col-sm-2 col-sm-offset-1">
-                            <button class="hit-button">Hit</button>
+                        <div class="col-sm-2 col-sm-offset-1 btn">
+                            <button class="btn btn-warning btn-block hit-button">Hit</button>
                         </div>
-                        <div class="col-sm-2 col-sm-offset-1">
-                            <button class="stand-button">Stand</button>
+                        <div class="col-sm-2 col-sm-offset-1 btn">
+                            <button class="btn btn-info btn-block stand-button">Stand</button>
                         </div>
                     </div>
+                    <button class="reset-button">Reset game</button>
                 </div>
             </div>
         </div>
