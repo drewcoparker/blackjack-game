@@ -1,3 +1,6 @@
+// Drew Parker
+// 15 December 2015
+// Blackjack game javascript
 
 $(document).ready(function() {
 
@@ -6,24 +9,47 @@ $(document).ready(function() {
     var playersHand = [];
     var dealersHand = [];
     var firstDeal = 0;
+    setUp();
 
-    // Place card images on board
-    placeCard('player', 1, 'deck');
-    placeCard('player', 2, 'deck');
-    placeCard('player', 3, 'deck');
-    placeCard('player', 4, 'deck');
-    placeCard('player', 5, 'deck');
-    placeCard('player', 6, 'deck');
+    //**********************************
+    //****************Setup*************
+    //**********************************
 
-    placeCard('dealer', 1, 'deck');
-    placeCard('dealer', 2, 'deck');
-    placeCard('dealer', 3, 'deck');
-    placeCard('dealer', 4, 'deck');
-    placeCard('dealer', 5, 'deck');
-    placeCard('dealer', 6, 'deck');
+    function setUp() {
+        // Set up the dealer card structure
+        var dealerCardHtml = '';
+        var playerCardHtml = '';
+        var card = '<img src="images/deck.png">';
 
+        // Build the html that will contain a card structure that permits a flip effect.
+        // Build the dealer card structure.
+        for (let i = 1; i < 7; i++) {
+            dealerCardHtml += '<div class="card dealer-card-' + i + '">';
+                dealerCardHtml += '<div class="card-inner dealer-card-' + i + '-inner">';
+                    dealerCardHtml += '<div class="card-front dealer-card-' + i + '-front"></div>';
+                    dealerCardHtml += '<div class="card-back dealer-card-' + i + '-back">'+card+'</div>';
+                dealerCardHtml += '</div>'
+            dealerCardHtml += '</div>'
+        }
+        $('.dealer-cards').html(dealerCardHtml);
 
-    // Click events
+        // Build the player card structure
+        for (let i = 1; i < 7; i++) {
+            playerCardHtml += '<div class="card player-card-' + i + '">';
+                playerCardHtml += '<div class="card-inner player-card-' + i + '-inner">';
+                    playerCardHtml += '<div class="card-front player-card-' + i + '-front"></div>';
+                    playerCardHtml += '<div class="card-back player-card-' + i + '-back">'+card+'</div>';
+                playerCardHtml += '</div>'
+            playerCardHtml += '</div>'
+        }
+        $('.player-cards').html(playerCardHtml);
+    }
+
+    //**********************************
+    //*********Click events*************
+    //**********************************
+
+    // The actions that occur when user presses the deal button
     $('.deal-button').click(function() {
         $('.deal-button').attr('disabled', true);
         // Deal events goes in here
@@ -54,7 +80,7 @@ $(document).ready(function() {
         firstDeal++;
     });
 
-
+    // The actions that occur when user presses the hit button
     $('.hit-button').click(function() {
         // Hit events go here
         // Add a card and update the total
@@ -68,10 +94,8 @@ $(document).ready(function() {
 
     });
 
-
+    // The actions that occur when user presses the stand button
     $('.stand-button').click(function() {
-        // Stand button events go in here
-        // You don't want anymore cards so the delaer has to go now
         // If the dealer has less than or equal to 16 he has to hit.
         // If more, he has to stand
         placeCard('dealer', 2, dealersHand[1]);
@@ -87,11 +111,14 @@ $(document).ready(function() {
         checkWin();
     });
 
-
+    // Calls the reset function which rests the board back to init state.
     $('.reset-button').click(function() {
         reset();
     });
 
+    //**********************************
+    //************Functions*************
+    //**********************************
 
     // Simulates a new deck of 52 cards in this example format: 3h = 3 of hearts.
     function createDeck() {
@@ -119,8 +146,15 @@ $(document).ready(function() {
 
     // Updates the DOM with the card images drawn.
     function placeCard(who, where, whatCard) {
-        var classSelector = '.' + who + '-cards .card-' + where;
+        var classSelector = '.' + who + '-card-' + where + '-front';
+        var flipSelector = '.' + who + '-card-' + where + '-inner';
+        // '.dealer-card-1-front
         $(classSelector).html('<img src="images/' + whatCard + '.png">');
+        if ((who === 'dealer') && (firstDeal === 0) && (where === 2)) {
+            // Don't flip this card until later
+        } else {
+            $(flipSelector).toggleClass('flip');
+        }
     }
 
     // Keeps track of the player's and dealer's totals based on what hands were
@@ -197,32 +231,17 @@ $(document).ready(function() {
         }
     }
 
-
     // Resets the bord (DOM), emptys the hands, and creates a new deck.
     function reset() {
         theDeck = createDeck();
         playersHand = [];
         dealersHand = [];
-        $('.card').html('');
+        setUp();
         var playerTotal = calculateTotal('player', playersHand);
         var dealerTotal = calculateTotal('dealer', dealersHand);
         $('.deal-button').attr('disabled', false);
         firstDeal = 0;
 
-        // Place card images on board
-        placeCard('player', 1, 'deck');
-        placeCard('player', 2, 'deck');
-        placeCard('player', 3, 'deck');
-        placeCard('player', 4, 'deck');
-        placeCard('player', 5, 'deck');
-        placeCard('player', 6, 'deck');
-
-        placeCard('dealer', 1, 'deck');
-        placeCard('dealer', 2, 'deck');
-        placeCard('dealer', 3, 'deck');
-        placeCard('dealer', 4, 'deck');
-        placeCard('dealer', 5, 'deck');
-        placeCard('dealer', 6, 'deck');
     }
 
 // Closes the doc ready function
