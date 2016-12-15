@@ -5,7 +5,7 @@
     padding: 30px 0;
     color: #fff;
     border-radius: 10px 10px 50% 50%;
-    box-shadow: 0 0 1px rgba(0,0,0,.14), 0 1px 2px rgba(0,0,0,.28);
+    box-shadow: 8px 10px 5px rgba(0,0,0,.14), 0 8px 10px rgba(0,0,0,.28);
     position: relative;
     transform: perspective(1200px) rotateX(30deg);
 }
@@ -17,6 +17,8 @@
     margin: 10px;
     width: 12.6%;
     float: left;
+    /*padding: 10px;*/
+    /*border: 1px solid yellow;*/
 }
 
 img {

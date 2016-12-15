@@ -2,8 +2,9 @@
 $(document).ready(function() {
 
     // Globals
-    const freshDeck = createDeck();
-    var theDeck = freshDeck;
+    // const freshDeck = createDeck();
+
+    var theDeck = createDeck();
     var playersHand = [];
     var dealersHand = [];
     var firstDeal = 0;
@@ -104,7 +105,7 @@ $(document).ready(function() {
 
     function reset() {
         // the deck needs to be reset, so we need to call create again
-        theDeck = freshDeck;
+        theDeck = createDeck();
         // empty the playersHand and dealersHand
         // reset the DOM which includes all the cards and the 2 totals
         playersHand = [];
@@ -114,6 +115,7 @@ $(document).ready(function() {
         var playerTotal = calculateTotal('player', playersHand);
         var dealerTotal = calculateTotal('dealer', dealersHand);
         $('.deal-button').attr('disabled', false);
+        firstDeal = 0;
     }
 
     function createDeck() {
