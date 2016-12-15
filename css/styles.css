@@ -7,7 +7,7 @@
     border-radius: 10px 10px 50% 50%;
     box-shadow: 8px 10px 5px rgba(0,0,0,.14), 0 8px 10px rgba(0,0,0,.28);
     position: relative;
-    transform: perspective(1200px) rotateX(30deg);
+    transform: perspective(1200px) rotateX(15deg);
 }
 
 .card {

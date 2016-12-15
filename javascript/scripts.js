@@ -7,6 +7,22 @@ $(document).ready(function() {
     var dealersHand = [];
     var firstDeal = 0;
 
+    // Place card images on board
+    placeCard('player', 1, 'deck');
+    placeCard('player', 2, 'deck');
+    placeCard('player', 3, 'deck');
+    placeCard('player', 4, 'deck');
+    placeCard('player', 5, 'deck');
+    placeCard('player', 6, 'deck');
+
+    placeCard('dealer', 1, 'deck');
+    placeCard('dealer', 2, 'deck');
+    placeCard('dealer', 3, 'deck');
+    placeCard('dealer', 4, 'deck');
+    placeCard('dealer', 5, 'deck');
+    placeCard('dealer', 6, 'deck');
+
+
     // Click events
     $('.deal-button').click(function() {
         $('.deal-button').attr('disabled', true);
@@ -26,6 +42,7 @@ $(document).ready(function() {
         // Place the player's cards onto their divs
         placeCard('player', 1, playersHand[0]);
         placeCard('player', 2, playersHand[1]);
+
 
         // Place the dealer's cards onto their divs
         placeCard('dealer', 1, dealersHand[0]);
@@ -191,6 +208,21 @@ $(document).ready(function() {
         var dealerTotal = calculateTotal('dealer', dealersHand);
         $('.deal-button').attr('disabled', false);
         firstDeal = 0;
+
+        // Place card images on board
+        placeCard('player', 1, 'deck');
+        placeCard('player', 2, 'deck');
+        placeCard('player', 3, 'deck');
+        placeCard('player', 4, 'deck');
+        placeCard('player', 5, 'deck');
+        placeCard('player', 6, 'deck');
+
+        placeCard('dealer', 1, 'deck');
+        placeCard('dealer', 2, 'deck');
+        placeCard('dealer', 3, 'deck');
+        placeCard('dealer', 4, 'deck');
+        placeCard('dealer', 5, 'deck');
+        placeCard('dealer', 6, 'deck');
     }
 
 // Closes the doc ready function
