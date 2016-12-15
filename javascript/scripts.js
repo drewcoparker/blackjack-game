@@ -2,8 +2,6 @@
 $(document).ready(function() {
 
     // Globals
-    // const freshDeck = createDeck();
-
     var theDeck = createDeck();
     var playersHand = [];
     var dealersHand = [];
@@ -39,6 +37,7 @@ $(document).ready(function() {
         firstDeal++;
     });
 
+
     $('.hit-button').click(function() {
         // Hit events go here
         // Add a card and update the total
@@ -51,6 +50,7 @@ $(document).ready(function() {
         }
 
     });
+
 
     $('.stand-button').click(function() {
         // Stand button events go in here
@@ -70,11 +70,89 @@ $(document).ready(function() {
         checkWin();
     });
 
+
     $('.reset-button').click(function() {
         reset();
     });
 
 
+    // Simulates a new deck of 52 cards in this example format: 3h = 3 of hearts.
+    function createDeck() {
+        var newDeck = [];
+        var suits = ['h', 's', 'd', 'c'];
+        for (let s = 0; s < suits.length; s++) {
+            for (c = 1; c <= 13; c++) {
+                newDeck.push(c + suits[s]);
+            }
+        }
+        return newDeck;
+    }
+
+    // Simulates a shuffle by swapping 2 random cards in the deck, 1000
+    // different times.
+    function shuffleDeck() {
+        for (let i = 0; i < 1000; i++) {
+            var rando1 = Math.floor(Math.random() * theDeck.length);
+            var rando2 = Math.floor(Math.random() * theDeck.length);
+            var temp = theDeck[rando1];
+            theDeck[rando1] = theDeck[rando2];
+            theDeck[rando2] = temp;
+        }
+    }
+
+    // Updates the DOM with the card images drawn.
+    function placeCard(who, where, whatCard) {
+        var classSelector = '.' + who + '-cards .card-' + where;
+        $(classSelector).html('<img src="images/' + whatCard + '.png">');
+    }
+
+    // Keeps track of the player's and dealer's totals based on what hands were
+    // dealt.
+    function calculateTotal(who, hand) {
+        var classToTarget = '.' + who + '-total-number';
+        var total = 0;
+        var cardValue = 0;
+        var hasAce = 0;
+
+        for (let i = 0; i < hand.length; i++) {
+            if ((firstDeal === 0) && (who === 'dealer') && (i === 1)) {
+                // Skip DOM totaling the dealers face down card
+            } else {
+                cardValue = Number(hand[i].slice(0, -1));
+                // If it's a face card, make it worth 10.
+                if (cardValue > 10) {
+                    cardValue = 10;
+                }
+                // If it's an Ace make it worth 11. Value can change to 1 later.
+                if (cardValue === 1) {
+                    hasAce++;
+                    cardValue = 11;
+                }
+                total += cardValue;
+            }
+        }
+
+        // Make the Ace's value daynamic based on the total
+        if ((total > 21) && (hasAce === 1)) {
+            total -= 10;
+        } else if ((total > 21) && (hasAce === 2)) {
+            total -= 20;
+        } else if ((total > 21) && (hasAce === 3)) {
+            total -= 30;
+        }
+
+        // Update the DOM element that displays the totals. This should be
+        // in a unique function.
+        if (total > 21) {
+            $(classToTarget).text("BUST!");
+        } else {
+            $(classToTarget).text(total);
+        }
+        return total;
+    }
+
+    // Checks to see if dealer or player has busted won or tied. Called after
+    // the stand button has been pressed.
     function checkWin() {
         playerTotal = calculateTotal('player', playersHand);
         dealerTotal = calculateTotal('dealer', dealersHand);
@@ -103,82 +181,16 @@ $(document).ready(function() {
     }
 
 
+    // Resets the bord (DOM), emptys the hands, and creates a new deck.
     function reset() {
-        // the deck needs to be reset, so we need to call create again
         theDeck = createDeck();
-        // empty the playersHand and dealersHand
-        // reset the DOM which includes all the cards and the 2 totals
         playersHand = [];
         dealersHand = [];
-
         $('.card').html('');
         var playerTotal = calculateTotal('player', playersHand);
         var dealerTotal = calculateTotal('dealer', dealersHand);
         $('.deal-button').attr('disabled', false);
         firstDeal = 0;
-    }
-
-    function createDeck() {
-        var newDeck = [];
-        var suits = ['h', 's', 'd', 'c'];
-        for (let s = 0; s < suits.length; s++) {
-            for (c = 1; c <= 13; c++) {
-                newDeck.push(c + suits[s]);
-            }
-        }
-        return newDeck;
-    }
-
-    function shuffleDeck() {
-        // Pick 2 random cards and switch them. This mutates theDeck. Do this
-        // one thousand times.
-        for (let i = 0; i < 1000; i++) {
-            var rando1 = Math.floor(Math.random() * theDeck.length);
-            var rando2 = Math.floor(Math.random() * theDeck.length);
-            var temp = theDeck[rando1];
-            theDeck[rando1] = theDeck[rando2];
-            theDeck[rando2] = temp;
-        }
-    }
-
-    function placeCard(who, where, whatCard) {
-        var classSelector = '.' + who + '-cards .card-' + where;
-        $(classSelector).html('<img src="images/' + whatCard + '.png">');
-    }
-
-
-    function calculateTotal(who, hand) {
-        var classToTarget = '.' + who + '-total-number';
-        var total = 0;
-        var cardValue = 0;
-        var hasAce = false;
-
-        for (let i = 0; i < hand.length; i++) {
-            if ((firstDeal === 0) && (who === 'dealer') && (i === 1)) {
-                // Skip DOM totaling the dealers face down card
-            } else {
-                cardValue = Number(hand[i].slice(0, -1));
-                if (cardValue > 10) {
-                    cardValue = 10;
-                }
-                if (cardValue === 1) {
-                    hasAce = true;
-                    cardValue = 11;
-                }
-                total += cardValue;
-            }
-        }
-        //
-        if ((total > 21) && (hasAce)) {
-            total -= 10;
-        }
-
-        if (total > 21) {
-            $(classToTarget).text("BUST!");
-        } else {
-            $(classToTarget).text(total);
-        }
-        return total;
     }
 
 // Closes the doc ready function
